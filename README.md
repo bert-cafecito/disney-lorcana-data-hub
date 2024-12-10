@@ -17,6 +17,8 @@ A centralized repository for collecting, analyzing, and exploring Disney Lorcana
 │
 ├── scripts/                <- Python scripts for data collection and processing.
 │   ├── clean_data.py       <- Preprocess raw data into clean datasets.
+│   ├── scrape_data.py      <- Scripts for scraping from sources (like APIs).
+│   ├── setup_database.py   <- Initialize and set up a SQLite database.
 │   └── utils/              <- Helper utilities.
 │
 ├── requirements.txt        <- List of Python dependencies.
