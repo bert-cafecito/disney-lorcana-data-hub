@@ -9,6 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - A `load_data.py` in the 'scripts' directory.
 - A `setup_database.py` in the 'scripts' directory.
+- A `images` directory to store images.
+
+### Changed
+- Update `scrape_data.py` in the 'scripts' directory to scrape Lorcast API.
+- Update `scrape_data.py` in the 'scripts' directory to use panda.
+- Include `lorecast_api` data in the `scrape_data.py`
 
 ## [0.0.1] - 2024-12-09
 

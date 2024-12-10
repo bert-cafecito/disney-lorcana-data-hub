@@ -10,6 +10,9 @@ A centralized repository for collecting, analyzing, and exploring Disney Lorcana
 │   ├── raw/                <- Raw data from scraping or other sources.
 │   └── processed/          <- Cleaned and preprocessed data ready for analysis.
 │
+├── images/                 <- Directory for storing card images or visual assets.
+│   └── cards/              <- Individual card images (e.g., downloaded or scraped).
+│
 ├── notebooks/              <- Jupyter Notebooks for data exploration and ML.
 │   ├── exploration/        <- EDA (Exploratory Data Analysis) notebooks.
 │   ├── visualization/      <- Notebooks focused on visualizing card trends.
