@@ -1,24 +1,43 @@
 import sqlite3
 
-# Connect to SQLite database (or create it if it doesn't exist)
-conn = sqlite3.connect('data/processed/disney_lorcana.db')
+def create_connection(db_file):
+    """ create a database connection to the SQLite database """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        print(f"Connected to {db_file}")
+    except sqlite3.Error as e:
+        print(e)
+    return conn
 
-# Create a cursor object
-cur = conn.cursor()
+def create_cards_table(conn):
+    """ create a cards table in the database """
+    try:
+        sql_create_table = """CREATE TABLE IF NOT EXISTS cards (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                name TEXT NOT NULL,
+                                datasource_name TEXT NOT NULL
+                            );"""
+        cursor = conn.cursor()
+        cursor.execute(sql_create_table)
+        print(f"Table created successfully: cards")
+    except sqlite3.Error as e:
+        print(e)
 
-# Create cards table query
-create_cards_table = '''
-CREATE TABLE IF NOT EXISTS cards (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
-)
-'''
+def main():
+    database = "data/processed/disney_lorcana.db"
 
-# Execute the create cards table query
-cur.execute(create_cards_table)
+    # create a database connection
+    conn = create_connection(database)
 
-# Commit the changes
-conn.commit()
+    # create table
+    if conn is not None:
+        create_cards_table(conn)
+    else:
+        print("Error! cannot create the database connection.")
 
-# Close the connection
-conn.close()
+    if conn:
+        conn.close()
+
+if __name__ == '__main__':
+    main()
