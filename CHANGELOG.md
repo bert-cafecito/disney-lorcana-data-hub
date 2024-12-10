@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - A `images` directory to store images.
 
 ### Changed
+- Update `clean_data.py` in the 'scripts' directory to clean raw Lorcast API.
 - Update `scrape_data.py` in the 'scripts' directory to scrape Lorcast API.
 - Update `scrape_data.py` in the 'scripts' directory to use panda.
 - Include `lorecast_api` data in the `scrape_data.py`

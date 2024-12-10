@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 class DisneyLorcana:
@@ -131,22 +132,81 @@ class DisneyLorcana:
 
         print('Cleaned up the data for `Shimmering Skies` set')
 
+    def run(self):
+        """
+        Run the Disney Lorcana data cleaning
+        """
+        # Clean up the data for `The First Chapter` set
+        self.the_first_chapter()
+
+        # Clean up the data for `Rise of The Floodborn` set
+        self.rise_of_the_floodborn()
+
+        # Clean up the data for `Into the Inklands` set
+        self.into_the_inklands()
+
+        # Clean up the data for `Ursulas Return` set
+        self.ursulas_return()
+
+        # Clean up the data for `Shimmering Skies` set
+        self.shimmering_skies()
+
+class LorcastAPI:
+
+    def __init__(self):
+        self.process_dir = 'data/processed/lorcast_api'
+
+        # Create the processed directory if it does not exist
+        if not os.path.exists(self.process_dir):
+            os.makedirs(self.process_dir)
+
+    def clean_cards(self):
+        # Load data from Lorcast API CSV files
+        lorcast_api_dir = "data/raw/lorcast_api"
+        csv_files = [f"{lorcast_api_dir}/{f}" for f in os.listdir(lorcast_api_dir) if f.endswith('.csv')]
+        num_of_files = len(csv_files)
+        print(f"Found {num_of_files} CSV files in {lorcast_api_dir}")
+
+        # Load data from each CSV file
+        for csv_file in csv_files:
+            # Set the data file path to the current CSV file
+            data_file = csv_file
+            
+            # Replace `raw` with `processed` in the file path for saving the processed data
+            process_file = csv_file.replace('raw', 'processed')
+
+            print(f"Loading data from {data_file}")
+            df = pd.read_csv(csv_file)
+
+            # Remove `image_uris` column
+            if 'image_uris' in df.columns:
+                df.drop(columns=['image_uris'], inplace=True)
+                print("Removed `image_uris` column")
+
+            # Replace `raw` with `processed` in the file path
+            process_file = csv_file.replace('raw', 'processed')
+
+            # Save the processed data
+            df.to_csv(process_file, index=False)
+
+
+
+            
+
+            
+
+    def run(self):
+        """
+        Run the Lorcast API data cleaning
+        """
+        self.clean_cards()
+
 if __name__ == '__main__':
 
-    # Create an instance of the DisneyLorcana class
+    # Clean up the data for Disney Lorcana
     disney_lorcana = DisneyLorcana()
+    disney_lorcana.run()
 
-    # Clean up the data for `The First Chapter` set
-    disney_lorcana.the_first_chapter()
-
-    # Clean up the data for `Rise of The Floodborn` set
-    disney_lorcana.rise_of_the_floodborn()
-
-    # Clean up the data for `Into the Inklands` set
-    disney_lorcana.into_the_inklands()
-
-    # Clean up the data for `Ursula's Return` set
-    disney_lorcana.ursulas_return()
-
-    # Clean up the data for `Shimmering Skies` set
-    disney_lorcana.shimmering_skies()
+    # Clean up the data for Lorcast API
+    lorcast_api = LorcastAPI()
+    lorcast_api.run()
